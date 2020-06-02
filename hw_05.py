@@ -1,71 +1,64 @@
-#사칙연산 함수 만들기
-def sum(a,b):
-    return a+b
-
-def sub(a,b):
-    return a-b
-
-def mul(a,b):
-    return a*b
-
-def div(a,b):
-    return a/b
-
-#무한루프 계산기
+능별로 함수로 만들고 계산결과는 txt파일에 저장되도록 만드는거입니다!
 while True:
+    print("E를 누르면 종료되고 C를 누르면 재입력이 가능합니다")
     qes = input("원하는 계산식을 입력하시오: ")
 
-#띄어쓰기 있을 때 분리
-    space_qes = qes.split()
-
-    if space_qes[0] == "c" or space_qes[0] == "C":
+# C / E 일때 작동방식 저장
+    if qes == 'c' or qes == 'C':
         print("다시 입력하세요")
         continue
 
-    if space_qes[0] == "e" or space_qes[0] == "E":
-        print("계산기가 종료됩니다")
+    if qes == 'e' or qes == 'E':
+        print("종료됩니다.")
         break
 
-    if space_qes[1] == "+":
-        numA = int(space_qes[0])
-        numB = int(space_qes[2])
-        answer = sum(numA, numB)
-        print(qes + " = %d"%answer)
+# 사칙연산 계산식
+    if '+' in qes:
+        numA, numB = qes.split("+")
+        print(numA, numB)
+        calc_mark = '+'
 
-    if space_qes[1] == "-":
-        numA = int(space_qes[0])
-        numB = int(space_qes[2])
-        answer = sub(numA, numB)
-        print(qes + " = %d"%answer)
+    elif '-' in qes:
+        numA, numB = qes.split("-")
+        print(numA, numB)
+        calc_mark = '-'
 
-    if space_qes[1] == "*":
-        numA = int(space_qes[0])
-        numB = int(space_qes[2])
-        answer = mul(numA, numB)
-        print(qes + " = %d"%answer)
+    elif '*' in qes:
+        numA, numB = qes.split("*")
+        print(numA, numB)
+        calc_mark = '*'
 
-    if space_qes[1] == "/":
-        numA = int(space_qes[0])
-        numB = int(space_qes[2])
-        answer = div(numA, numB)
-        print(qes + " = %d"%answer)
+    elif '/' in qes:
+        numA, numB = qes.split("/")
+        print(numA, numB)
+        calc_mark = '/'
 
+    else:
+        print("연산자 오류. 다시 입력하세요.")
+        continue
 
- #       print(qes+"="+answer)
+# 공백이 있는 부분 삭제
+    numA = numA.strip()
+    numB = numB.strip()
 
-# 띄어쓰기 없을 때 분리
-    add_qes1 = qes.split("+")
-    minus_qes1 = qes.split("-")
-    mulit_qes1 = qes.split("*")
-    divi_qes1 = qes.split("/")
+# 'isdigit'는 숫자 판별 함수로 True, False 반환
+    if not numA.isdigit() or not numB.isdigit():
+        print("숫자 오류. 다시 입력하세요.")
+        continue
 
+# 계산 결과 출력
+    if calc_mark == '+':
+        answer = int(numA)+int(numB)
+        print(str(numA)+str(calc_mark)+str(numB)+"에 대한 결과값은 "+str(answer))
 
+    if calc_mark == '-':
+        answer = int(numA)-int(numB)
+        print(str(numA)+str(calc_mark)+str(numB)+"에 대한 결과값은 "+str(answer))
 
+    if calc_mark == '*':
+        answer = int(numA)*int(numB)
+        print(str(numA)+str(calc_mark)+str(numB)+"에 대한 결과값은 "+str(answer))
 
-#print(add_qes)
-
-#입력받은 숫자 분리
-
-
-#print("번호는?")
-#print(q+"="+a)
+    if calc_mark == '/':
+        answer = int(numA)/int(numB)
+        print(str(numA)+str(calc_mark)+str(numB)+"에 대한 결과값은 "+str(answer))
